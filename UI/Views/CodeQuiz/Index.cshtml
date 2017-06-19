@@ -1,0 +1,112 @@
+﻿@model List<UI.Models.CodeQuiz>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Welcome To Code Quiz</h2>
+
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
+        <li role="presentation"><a href="#running" aria-controls="running" role="tab" data-toggle="tab">Running</a></li>
+        <li role="presentation"><a href="#past" aria-controls="past" role="tab" data-toggle="tab">Past</a></li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="upcoming">
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Submissions</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var quiz in Model.Where(m=>m.StartTime>DateTime.Now).ToList())
+                    {
+                    <tr>
+                        <td>0</td>
+                        <td>@quiz.Title</td>
+                        <td>@quiz.Description</td>
+                        <td>@quiz.Status</td>
+                        <td>N/A</td>
+                        <td>@quiz.StartTime</td>
+                        <td>@quiz.EndTime</td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="running">
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Submissions</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var quiz in Model.Where(m=>(m.StartTime < DateTime.Now && m.EndTime> DateTime.Now)).ToList())
+                    {
+                    <tr>
+                        <td>0</td>
+                        <td>@quiz.Title</td>
+                        <td>@quiz.Description</td>
+                        <td>@quiz.Status</td>
+                        <td>N/A</td>
+                        <td>@quiz.StartTime</td>
+                        <td>@quiz.EndTime</td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="past">
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Submissions</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     @foreach(var quiz in Model.Where(m=>m.EndTime < DateTime.Now).ToList())
+                    {
+                    <tr>
+                        <td>0</td>
+                        <td>@quiz.Title</td>
+                        <td>@quiz.Description</td>
+                        <td>@quiz.Status</td>
+                        <td>N/A</td>
+                        <td>@quiz.StartTime</td>
+                        <td>@quiz.EndTime</td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
